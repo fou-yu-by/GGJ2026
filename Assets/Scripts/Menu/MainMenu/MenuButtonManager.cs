@@ -25,9 +25,6 @@ public class MenuButtonManager : MonoBehaviour,ISaveable
         
     }
     
-    //TODO:跳转设置画面
-
-    
     
     
     public void LoadGameScene()
@@ -35,7 +32,7 @@ public class MenuButtonManager : MonoBehaviour,ISaveable
         isFirstGame = false;
         SaveLoadManager.Instance.Save();
         //TODO:“开始游戏”加载的场景名称
-        //TransitionManager.Instance.TransitionToScene("MainMenu","testScene");
+        TransitionManager.Instance.TransitionToScene("MainMenu","GameScenexgp");
     }
 
     public void QuitGame()
