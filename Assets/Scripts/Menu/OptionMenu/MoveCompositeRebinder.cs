@@ -20,7 +20,7 @@ public class MoveCompositeRebinder : MonoBehaviour
     private InputAction moveAction;
     
     
-    private const string BINDING_KEY = "MoveCompositeRebinding";
+    private const string BINDING_KEY_MOVE = "MoveCompositeRebinding";
 
     private void Start()
     {
@@ -59,12 +59,12 @@ public class MoveCompositeRebinder : MonoBehaviour
                 bindingIndex = moveAction.bindings.IndexOf(binding => binding.name == "Right" || binding.name == "right");
                 break;
         }
-
+        
         if (bindingIndex < 0)
         {
             return;
         }
-        //切换至其他Action Map
+        //禁用Action Map 以改键
         moveAction.Disable();
         var rebindOperation = moveAction.PerformInteractiveRebinding(bindingIndex)
             .WithControlsExcluding("Mouse")
@@ -108,20 +108,27 @@ public class MoveCompositeRebinder : MonoBehaviour
     }
     
     
+    
+    #region  存取改键数据
+
+    
     private void SaveBindings()
     {
         string bindingJson = moveAction.actionMap.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString(BINDING_KEY, bindingJson);
+        PlayerPrefs.SetString(BINDING_KEY_MOVE, bindingJson);
         PlayerPrefs.Save();
     }
 
     private void LoadBindings()
     {
-        if (PlayerPrefs.HasKey(BINDING_KEY))
+        if (PlayerPrefs.HasKey(BINDING_KEY_MOVE))
         {
-            string bindingJson = PlayerPrefs.GetString(BINDING_KEY);
+            string bindingJson = PlayerPrefs.GetString(BINDING_KEY_MOVE);
             moveAction.actionMap.LoadBindingOverridesFromJson(bindingJson);
             
         }
     }
+
+    #endregion
+    
 }

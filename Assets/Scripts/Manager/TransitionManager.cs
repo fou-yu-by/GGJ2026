@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class TransitionManager : Singleton<TransitionManager>
 {
     public string startScene;
+    [HideInInspector]public string currentScene;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -29,9 +31,16 @@ public class TransitionManager : Singleton<TransitionManager>
         {
             yield return SceneManager.UnloadSceneAsync(from);
         }
-
         yield return SceneManager.LoadSceneAsync(to, LoadSceneMode.Additive);
         Scene newScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
         SceneManager.SetActiveScene(newScene);
+        currentScene = SceneManager.GetActiveScene().name;
     }
+    
+    //返回主菜单
+    public void BackToTheMainMenu()
+    {
+        TransitionToScene(currentScene, startScene);
+    }
+    
 }
