@@ -23,18 +23,18 @@ public class PlayerMove : MonoBehaviour
     private void OnEnable()
     {
         playerInput.actions["Move"].Enable();
-        playerInput.actions["Move"].performed += OnMove;
-        playerInput.actions["Move"].canceled += OnMove;
+        playerInput.actions["Move"].performed += HandleMove;
+        playerInput.actions["Move"].canceled += HandleMove;
     }
 
     private void OnDisable()
     {
         playerInput.actions["Move"].Disable();
-        playerInput.actions["Move"].performed -= OnMove;
-        playerInput.actions["Move"].canceled -= OnMove;
+        playerInput.actions["Move"].performed -= HandleMove;
+        playerInput.actions["Move"].canceled -= HandleMove;
     }
 
-    void OnMove(InputAction.CallbackContext ctx)
+    private void HandleMove(InputAction.CallbackContext ctx)// AI将onmove改为handlemove
     {
         inputMovement = ctx.ReadValue<Vector2>();
     }
