@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScene: MainMenu
+  currentScene: 
 --- !u!4 &997475185
 Transform:
   m_ObjectHideFlags: 0
