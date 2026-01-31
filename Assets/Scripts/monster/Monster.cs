@@ -12,6 +12,7 @@ public abstract class Monster : MonoBehaviour
 	protected GameObject player;
 	protected PlayerStats playerStats;
 	protected float collisionCooldownTimer = 0f;
+	protected bool isActivated = false;
 
 	private Slider HealthUI;
 	protected virtual void Awake()
@@ -54,9 +55,16 @@ public abstract class Monster : MonoBehaviour
 	public int CurrentHp => currentHp;
 	public int AttackPower => attackPower;
 	public Vector2 PositionXY => new Vector2(transform.position.x, transform.position.y);
+	public bool IsActivated => isActivated;
+
+	public virtual void Activate()
+	{
+		isActivated = true;
+	}
 
 	protected virtual void Update()
 	{
+		if (!isActivated) return;
 		Move();
 	}
 
