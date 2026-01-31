@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //人物基础数据，包含buff数值叠加
+[System.Serializable]
 public class Stats
 {
     [SerializeField] private int baseValue;

@@ -7,5 +7,6 @@ public class BackToMainMenu : MonoBehaviour
     public void ClickBackToMainMenu()
     {
         TransitionManager.Instance.BackToTheMainMenu();
+        this.gameObject.SetActive(false);
     }
 }
