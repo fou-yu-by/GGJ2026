@@ -35,20 +35,19 @@ public class Monster1 : Monster
 	}
 	private void AutoPath()
 	{
+		if(player==null) return;
+		pathUpdateTimer -= Time.deltaTime;
 		if(pathUpdateTimer <= 0f)
 		{
 			UpdatePath();
 			pathUpdateTimer = pathUpdateInterval;
 		}
-		else
-		{
-			pathUpdateTimer -= Time.deltaTime;
-		}
+
 		if(pathPoints == null || pathPoints.Count <= 0|| currentPathIndex >= pathPoints.Count)
 		{
 			UpdatePath();
 		}
-		else if(Vector2.Distance(transform.position,pathPoints[currentPathIndex]) <= 0.1f)
+		else if(currentPathIndex < pathPoints.Count && Vector2.Distance(transform.position,pathPoints[currentPathIndex]) <= 0.1f)
 		{
 			currentPathIndex++;
 			if(currentPathIndex >= pathPoints.Count)
@@ -60,9 +59,9 @@ public class Monster1 : Monster
 	}
 	private void UpdatePath()
 	{
-		
-		seeker.StartPath(transform.position, player.transform.position,Path=> {
-			pathPoints = new List<Vector3>(Path.vectorPath);
+		Vector2 st=transform.position+(player.transform.position-transform.position).normalized*5f;
+		seeker.StartPath(st, player.transform.position,Path=> {
+			pathPoints = Path.vectorPath;
 			currentPathIndex = 0;
 		});
 	}
