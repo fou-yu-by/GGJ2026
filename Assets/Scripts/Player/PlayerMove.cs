@@ -51,7 +51,11 @@ public class MainPlayer : MonoBehaviour
         //hits里的每一个enemy执行受伤逻辑
         foreach (var enemy in hits)
         {
-            enemy.transform.GetComponent<Monster>().TakeDamage(playerStats.damage.GetValue());
+            Monster monster = enemy.transform.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(playerStats.damage.GetValue());
+            }
         }
         
     }
