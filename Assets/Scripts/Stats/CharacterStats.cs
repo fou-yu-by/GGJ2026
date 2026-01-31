@@ -36,8 +36,10 @@ public class CharacterStats : MonoBehaviour
    private IEnumerator IncreaseStatsByBuffCoroutine(int _modifier, float _duration, Stats _stats)
    {
       _stats.AddModifier(_modifier);
+      this.TriggerEvent("ChangeModifierEvent", new PlayerArgs{ _stats = _stats});
       yield return new WaitForSeconds(_duration);
       _stats.RemoveModifier(_modifier);
+      this.TriggerEvent("ChangeModifierEvent", new PlayerArgs{ _stats = _stats});
    }
 
    //对其他单位造成伤害

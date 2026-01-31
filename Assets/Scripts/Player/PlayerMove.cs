@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class MainPlayer : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class MainPlayer : MonoBehaviour
 
     private void OnEnable()
     {
+        //inputSystem
         playerInput.actions["Move"].Enable();
         playerInput.actions["Move"].performed += HandleMove;
         playerInput.actions["Move"].canceled += HandleMove;
@@ -39,10 +41,18 @@ public class MainPlayer : MonoBehaviour
 
         playerInput.actions["SwitchMask"].performed += HandlePickUp;
         playerInput.actions["SwitchMask"].canceled += CancelPickUp;
+        
+        //Event
+        EventManager.Instance.AddListener("ChangeModifierEvent", OnChangeModifierEvent);
+        
     }
+
+
+
 
     private void OnDisable()
     {
+        //InputSystem
         playerInput.actions["Move"].Disable();
         playerInput.actions["Move"].performed -= HandleMove;
         playerInput.actions["Move"].canceled -= HandleMove;
@@ -50,6 +60,17 @@ public class MainPlayer : MonoBehaviour
         playerInput.actions["SwitchMask"].performed -= HandlePickUp;
         playerInput.actions["SwitchMask"].canceled -= CancelPickUp;
         
+        //Event
+        
+        
+    }
+    private void OnChangeModifierEvent(object sender, EventArgs e)
+    {
+        PlayerArgs args = e as PlayerArgs;
+        if (args == null) return;
+        args._stats.GetValue();
+        
+        playerStats.UpdateHealthBar();
     }
     private void CancelPickUp(InputAction.CallbackContext ctx)
     {
@@ -102,10 +123,55 @@ public class MainPlayer : MonoBehaviour
     //拾取面具,由面具Trigger触发
     public void PickUpTheMask(MaskBase mask)
     {
+        
+        
         if (isPickUp)
         {
             EquipManager.Instance.Mask = mask;
             EquipManager.Instance.UpdateSlotUI();
+            
+            //拾取后给予特殊效果
+            //buff
+            GetBuffFromEquipMask(mask);
+            
+            //TODO开启技能
+            this.TriggerEvent("AfterPickUpTheMask");
+            
+        }
+        
+    }
+
+
+
+    private void GetBuffFromEquipMask(MaskBase mask)
+    {
+        if (mask.MaskModifiers.Count > 0)
+        {
+            //即面具存在buff效果
+            foreach (var modifier in mask.MaskModifiers)
+            {
+                switch (modifier.modifierName)
+                {
+                    case "damage":
+                        playerStats.IncreaseStatsByBuff(modifier.modifierValue, modifier.modifierDuration,
+                            playerStats.damage);
+                        break;
+                    case "health":
+                        playerStats.IncreaseStatsByBuff(modifier.modifierValue, modifier.modifierDuration,
+                            playerStats.health);
+                        break;
+                    case "moveSpeed":
+                        playerStats.IncreaseStatsByBuff(modifier.modifierValue, modifier.modifierDuration,
+                            playerStats.moveSpeed);
+                        break;
+                    case "attackDistance":
+                        playerStats.IncreaseStatsByBuff(modifier.modifierValue, modifier.modifierDuration,
+                            playerStats.attackDistance);
+                        break;
+                }
+
+                
+            }
         }
     }
 

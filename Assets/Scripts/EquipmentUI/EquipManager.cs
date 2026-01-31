@@ -36,6 +36,7 @@ public class EquipManager : Singleton<EquipManager>
             emotionSlot.sprite = ((EmotionMask)Mask).MaskIcon;
             emotionSlot.GetComponentInChildren<Text>().text = Mask.MaskName;
         }
+        
     }
     
     //存储为Json
