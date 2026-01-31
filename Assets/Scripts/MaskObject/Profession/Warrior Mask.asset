@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Warrior Mask
   m_EditorClassIdentifier: 
   MaskType: 1
+  SkillType: 2
   MaskName: Warrior Mask
   MaskIcon: {fileID: 21300000, guid: eb384736509e67247a4bcd6223dd53ee, type: 3}
   MaskModifiers:
