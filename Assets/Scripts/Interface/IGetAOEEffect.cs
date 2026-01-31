@@ -1,7 +1,6 @@
 public interface IGetAOEEffect
 {
-    void GetAOEEffect();
-    
-    
+    void GetAOEEffect(int effectID, float effectDuration);
+
     
 }

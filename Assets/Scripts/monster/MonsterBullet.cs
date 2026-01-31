@@ -11,6 +11,7 @@ public class MonsterBullet : MonoBehaviour
 	private bool isInitialized = false;
 	private Rigidbody2D rb;
 
+    private bool isAggroToMonsters;
 	[Header("Settings")]
 	[SerializeField] private LayerMask obstacleLayer;
 	[SerializeField] private bool destroyOnObstacle = true;
@@ -30,7 +31,7 @@ public class MonsterBullet : MonoBehaviour
 	/// <summary>
 	/// 初始化子弹参数
 	/// </summary>
-	public void Initialize(Vector2 direction, float speed, float maxRange, int damage, LayerMask? obstacle = null)
+	public void Initialize(Vector2 direction, float speed, float maxRange, int damage, LayerMask? obstacle = null, bool isAggroToMonsters = false)
 	{
 		this.direction = direction.normalized;
 		this.speed = speed;
@@ -41,7 +42,7 @@ public class MonsterBullet : MonoBehaviour
 		{
 			this.obstacleLayer = obstacle.Value;
 		}
-		
+		this.isAggroToMonsters = isAggroToMonsters;
 		// 使用 Rigidbody2D 速度移动，这样物理系统会正确检测碰撞
 		if (rb != null)
 		{
@@ -65,6 +66,15 @@ public class MonsterBullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+        if (isAggroToMonsters)
+        {
+            if (other.CompareTag("Monster"))
+            {
+                other.GetComponent<Monster>()?.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
+            }
+        }
 		// 检查是否击中玩家
 		if (other.CompareTag("Player"))
 		{
