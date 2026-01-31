@@ -8,15 +8,12 @@ public class MaskPrefab : MonoBehaviour
     public MaskBase mask;
     public LayerMask playerMask;
     
-    private void OnEnable()
+
+    private void Start()
     {
-        EventManager.Instance.AddListener("AfterPickUpTheMask", OnAfterPickUpTheMask);
+        GetComponent<SpriteRenderer>().sprite = mask.MaskIcon;
     }
 
-    private void OnAfterPickUpTheMask(object sender, EventArgs e)
-    {
-        Destroy(gameObject);
-    }
 
     private void Update()
     {
@@ -28,8 +25,10 @@ public class MaskPrefab : MonoBehaviour
         var hit =  Physics2D.OverlapCircle(transform.position, 1.0f, playerMask);
         if (hit != null && hit.GetComponent<MainPlayer>() != null)
         {
-            hit.GetComponent<MainPlayer>().PickUpTheMask(mask);
+            hit.GetComponent<MainPlayer>().PickUpTheMask(mask,this.gameObject);
+            //TODO:播放拾取音效
         }
         
     }
+    
 }

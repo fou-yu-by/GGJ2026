@@ -125,7 +125,7 @@ public class MainPlayer : Singleton<MainPlayer>
     }
     
     //拾取面具,由面具Trigger触发
-    public void PickUpTheMask(MaskBase mask)
+    public void PickUpTheMask(MaskBase mask, GameObject hit)
     {
         
         
@@ -138,11 +138,12 @@ public class MainPlayer : Singleton<MainPlayer>
             //buff
             GetBuffFromEquipMask(mask);
             
-            //TODO开启技能
+            //开启技能
             this.TriggerEvent("AfterPickUpTheMask");
             
+            Destroy(hit);
         }
-        //TODO:丢弃当前面具
+        
         
     }
 

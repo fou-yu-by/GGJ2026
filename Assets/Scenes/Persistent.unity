@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   professionSlot: {fileID: 815886435}
   emotionSlot: {fileID: 1949584298}
+  maskPrefab: {fileID: 1377500140677779026, guid: c9ec1c8dd2c46f74c9273685342e73e5, type: 3}
   Mask: {fileID: 0}
 --- !u!4 &302674291
 Transform:
