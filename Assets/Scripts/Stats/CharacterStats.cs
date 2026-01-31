@@ -47,7 +47,12 @@ public class CharacterStats : MonoBehaviour
       else
       {
          //TODO:单位死亡
+         Die();
       }
    }
-   
+   protected virtual void Die()
+	{
+		Debug.Log("Player: 死亡");
+		Destroy(gameObject);
+	}
 }
