@@ -12,7 +12,7 @@ public class MainPlayer : Singleton<MainPlayer>
     private Rigidbody2D rb;
     
     [Header("移动")]
-    private Vector2 inputMovement;
+    [SerializeField] public Vector2 inputMovement;
     [SerializeField] private float moveSpeed;
 
     private bool isAttack;

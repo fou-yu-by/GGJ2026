@@ -14,7 +14,7 @@ public class Skill : MonoBehaviour
     public float damageMultiplier;
     public float checkTargetDistance;
     public float damageRange;
-    
+    public float flySpeed;
     public Sprite skillImage;
     
     protected virtual void Start()
@@ -45,6 +45,21 @@ public class Skill : MonoBehaviour
         
     }
     
+    protected Transform CheckNearestTarget()
+    {
+        Transform nearestTarget = null;
+        var hits = Physics2D.OverlapCircleAll(MainPlayer.Instance.transform.position, checkTargetDistance,targetLayer);
+        float minDistance = Mathf.Infinity;
+        foreach (var hitInfo in hits)
+        {
+            if (Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position) <= minDistance)
+            {
+                minDistance = Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position);
+                nearestTarget = hitInfo.transform;
+            }
+        }
+        return nearestTarget;
+    }
     
     
 }

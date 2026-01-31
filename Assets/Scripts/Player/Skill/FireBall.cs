@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    [HideInInspector]public Rigidbody2D rb;
     private Transform target;
     private float flySpeed;
     [SerializeField] private LayerMask enemyLayer;
     private int damage;
+    private float damageRange;
     
     private void Awake()
     {
@@ -19,23 +20,32 @@ public class FireBall : MonoBehaviour
 
     private void Update()
     {
-        rb.velocity = (target.position - transform.position).normalized * flySpeed;
+        if(target == null) return;
+        else{ rb.velocity = (target.position - transform.position).normalized * flySpeed;}
     }
 
-    public void CacheTarget(Transform target, float flySpeed, int damage)
+    public void CacheTarget(Transform target, float flySpeed, int damage, float damageRange)
     {
         this.target = target;
         this.flySpeed = flySpeed;
         this.damage = damage;
+        this.damageRange = damageRange;
     }
 
+    public void SetDefaultValue(float flySpeed, int damage)
+    {
+        this.target = null;
+        this.flySpeed = flySpeed;
+        this.damage = damage;
+    }
+    
     public void TriggerBomb()
     {
-        var hit = Physics2D.OverlapCircle(transform.position, 5.0f, enemyLayer);
+        var hit = Physics2D.OverlapCircle(transform.position, damageRange, enemyLayer);
         if (hit != null)
         {
             //TODO:触发爆炸效果
-            var results = Physics2D.OverlapCircleAll(transform.position, 5.0f, enemyLayer);
+            var results = Physics2D.OverlapCircleAll(transform.position, damageRange, enemyLayer);
             if (results.Length <= 0) return;
             foreach (var result in results)
             {

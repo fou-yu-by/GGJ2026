@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBallSkill : Skill
 {
-    [SerializeField] private float flySpeed;
+    
     [SerializeField] private GameObject FireBallPrefab;
 
     protected override void UseSkill()
@@ -15,23 +15,24 @@ public class FireBallSkill : Skill
         if (CheckNearestTarget() != null)
         {
             fireBall.GetComponent<FireBall>().CacheTarget(CheckNearestTarget(), flySpeed, 
+                Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier), damageRange);
+        }
+        else
+        {
+            if (MainPlayer.Instance.inputMovement != Vector2.zero)
+            {
+                fireBall.GetComponent<FireBall>().rb.velocity = MainPlayer.Instance.inputMovement * flySpeed;
+            }
+            else
+            {
+                fireBall.GetComponent<FireBall>().rb.velocity = Vector3.right * flySpeed;
+            }
+
+            fireBall.GetComponent<FireBall>().SetDefaultValue(flySpeed,
                 Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier));
+            Destroy(fireBall, 4f);
         }
     }
 
-    private Transform CheckNearestTarget()
-    {
-        Transform nearestTarget = null;
-        var hits = Physics2D.OverlapCircleAll(MainPlayer.Instance.transform.position, checkTargetDistance,targetLayer);
-        float minDistance = Mathf.Infinity;
-        foreach (var hitInfo in hits)
-        {
-            if (Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position) <= minDistance)
-            {
-                minDistance = Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position);
-                nearestTarget = hitInfo.transform;
-            }
-        }
-        return nearestTarget;
-    }
+
 }
