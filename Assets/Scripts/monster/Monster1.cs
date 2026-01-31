@@ -4,12 +4,13 @@ public class Monster1 : Monster
 {
 	[Header("Movement")]
 	[SerializeField] protected float moveSpeed = 5f;
+	[SerializeField] protected float movediffrange = 1f;
 	private float actualMoveSpeed;
 
 	protected override void Awake()
 	{
 		base.Awake();
-		actualMoveSpeed = moveSpeed + Random.Range(-0.5f, 0.5f);
+		actualMoveSpeed = moveSpeed + Random.Range(-movediffrange, movediffrange);
 	}
 
 	protected override void Move()
