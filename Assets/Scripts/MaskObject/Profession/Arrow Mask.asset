@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Arrow Mask
   m_EditorClassIdentifier: 
   MaskType: 1
+  SkillType: 3
   MaskName: Arrow Mask
   MaskIcon: {fileID: 0}
   MaskModifiers:
   - modifierName: damage
     modifierValue: 5
+    modifierDuration: 0
   - modifierName: moveSpeed
     modifierValue: 3
+    modifierDuration: 0

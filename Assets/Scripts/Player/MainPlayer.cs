@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class MainPlayer : MonoBehaviour
+public class MainPlayer : Singleton<MainPlayer>
 {
     private PlayerInput playerInput;
-    private PlayerStats playerStats;
+    [HideInInspector]public PlayerStats playerStats;
     private Rigidbody2D rb;
     
     [Header("移动")]
@@ -20,8 +20,9 @@ public class MainPlayer : MonoBehaviour
     
     [SerializeField] private LayerMask enemyLayer;
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerInput = GetComponent<PlayerInput>();
         rb =  GetComponent<Rigidbody2D>();
         playerStats = GetComponent<PlayerStats>();
