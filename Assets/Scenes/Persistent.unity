@@ -460,7 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   professionSlot: {fileID: 815886435}
   emotionSlot: {fileID: 1949584298}
-  SkillSlot: {fileID: 1644136118}
+  SkillSlot: {fileID: 0}
   Mask: {fileID: 0}
 --- !u!4 &302674291
 Transform:
@@ -1359,9 +1359,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 211803034}
+  - {fileID: 302674291}
   - {fileID: 1183841331}
   - {fileID: 813760967}
-  - {fileID: 302674291}
   - {fileID: 115608277}
   - {fileID: 1107544732}
   - {fileID: 1295057511}
