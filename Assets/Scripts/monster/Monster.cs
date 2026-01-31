@@ -7,6 +7,9 @@ public abstract class Monster : MonoBehaviour
 	[SerializeField] protected int maxHp = 100;
 	[SerializeField] protected int attackPower = 10;
 	[SerializeField] protected float collisionCooldown = 1f;
+	
+	[Header("父物体设置")]
+	[SerializeField] protected Transform parentObject;
 
 	protected int currentHp;
 	protected GameObject player;
@@ -64,8 +67,16 @@ public abstract class Monster : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		if (!isActivated) return;
-		Move();
+		
+		if (parentObject != null)
+		{
+			transform.position = parentObject.position;
+		}
+		else
+		{
+			if (!isActivated) return;
+			Move();
+		}
 	}
 
 	protected virtual void FixedUpdate()
