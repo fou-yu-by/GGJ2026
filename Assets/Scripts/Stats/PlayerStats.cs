@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections;
+
 using UnityEngine.UI;
 public class PlayerStats : CharacterStats
 {
