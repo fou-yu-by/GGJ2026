@@ -4,20 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour
+public class MainPlayer : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private Vector2 inputMovement;
-    
+    private PlayerStats playerStats;
     private Rigidbody2D rb;
-
-    [SerializeField] private float moveSpeed;
     
+    
+    [Header("移动")]
+    private Vector2 inputMovement;
+    [SerializeField] private float moveSpeed;
+
+    public bool isAttack;
+    [SerializeField] private LayerMask enemyLayer;
     
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb =  GetComponent<Rigidbody2D>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void OnEnable()
@@ -25,13 +30,27 @@ public class PlayerMove : MonoBehaviour
         playerInput.actions["Move"].Enable();
         playerInput.actions["Move"].performed += HandleMove;
         playerInput.actions["Move"].canceled += HandleMove;
+
+        playerInput.actions["Attack"].started += HandleAttack;
     }
+
 
     private void OnDisable()
     {
         playerInput.actions["Move"].Disable();
         playerInput.actions["Move"].performed -= HandleMove;
         playerInput.actions["Move"].canceled -= HandleMove;
+    }
+    private void HandleAttack(InputAction.CallbackContext ctx)
+    {
+        isAttack = true;
+        Vector3 attackDirection = inputMovement.normalized;
+        
+        Debug.DrawLine(transform.position,attackDirection * playerStats.attackDistance.GetValue(), Color.red);
+        var hits = Physics2D.RaycastAll(transform.position, attackDirection, enemyLayer);
+        //TODO:hits里的每一个enemy执行受伤逻辑
+  
+        
     }
 
     private void HandleMove(InputAction.CallbackContext ctx)// AI将onmove改为handlemove
