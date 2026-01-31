@@ -27,7 +27,7 @@ public class EquipManager : Singleton<EquipManager>
         }
         //更新UI
         professionSlot.sprite = ((ProfessionMask)Mask).MaskIcon;
-        if (Mask.MaskType == MaskType.professtion)
+        if (Mask.MaskType == MaskType.Professtion)
         {
             professionSlot.GetComponentInChildren<Text>().text = Mask.MaskName;
         }

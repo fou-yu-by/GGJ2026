@@ -6,6 +6,7 @@ using UnityEngine;
 public class MaskBase : ScriptableObject
 {
    public MaskType MaskType;
+   public SkillType SkillType;
    
    public string MaskName;
    public Sprite MaskIcon;

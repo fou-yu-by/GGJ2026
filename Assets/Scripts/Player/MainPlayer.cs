@@ -71,6 +71,8 @@ public class MainPlayer : MonoBehaviour
         
         playerStats.UpdateHealthBar();
     }
+
+    #region 用户输入获取
     private void CancelPickUp(InputAction.CallbackContext ctx)
     {
         isPickUp = false;
@@ -97,10 +99,12 @@ public class MainPlayer : MonoBehaviour
         
     }
 
-    private void HandleMove(InputAction.CallbackContext ctx)// AI将onmove改为handlemove
+    private void HandleMove(InputAction.CallbackContext ctx) // AI将onmove改为handlemove
     {
         inputMovement = ctx.ReadValue<Vector2>();
     }
+
+    #endregion
 
     private void Update()
     {
@@ -137,6 +141,7 @@ public class MainPlayer : MonoBehaviour
             this.TriggerEvent("AfterPickUpTheMask");
             
         }
+        //TODO:丢弃当前面具
         
     }
 

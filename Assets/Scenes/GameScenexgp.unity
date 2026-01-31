@@ -1598,7 +1598,6 @@ Canvas:
   m_SortingLayerID: -292360923
   m_SortingOrder: 0
   m_TargetDisplay: 0
-<<<<<<< HEAD
 --- !u!1 &1767662545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,8 +1692,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 9b0ddb26257e5351be738609703b05bedce2955a
 --- !u!1 &1783583549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +1982,5 @@ SceneRoots:
   - {fileID: 1281974083}
   - {fileID: 1239125941}
   - {fileID: 278705184}
-<<<<<<< HEAD
   - {fileID: 1767662548}
-=======
->>>>>>> 9b0ddb26257e5351be738609703b05bedce2955a
+
