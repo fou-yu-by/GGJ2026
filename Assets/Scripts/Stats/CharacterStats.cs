@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -10,12 +12,20 @@ public class CharacterStats : MonoBehaviour
    public Stats moveSpeed;
    public Stats attackDistance;
    
-   
-   
+   protected Slider healthBar;
    public int currentHealth;
+
+   private void Awake()
+   {
+      healthBar = GetComponentInChildren<Slider>();
+   }
+
    protected virtual void Start()
    {
       currentHealth = health.GetValue();
+      healthBar.maxValue = currentHealth;
+      healthBar.value = currentHealth;
+      
    }
    
    //buff增益
@@ -31,7 +41,7 @@ public class CharacterStats : MonoBehaviour
    }
 
    //对其他单位造成伤害
-   public virtual void Doamage(CharacterStats _targetStats)
+   public virtual void Dodamage(CharacterStats _targetStats)
    {
       int totalDamage = damage.GetValue();
       _targetStats.TakeDamage(totalDamage);
@@ -43,6 +53,7 @@ public class CharacterStats : MonoBehaviour
       if (currentHealth - _damage > 0)
       {
          currentHealth -= _damage;
+         healthBar.value = currentHealth;
       }
       else
       {

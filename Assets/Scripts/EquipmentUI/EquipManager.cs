@@ -14,7 +14,7 @@ public class EquipManager : Singleton<EquipManager>
     public Dictionary<MaskType, MaskBase> equipmentDict = new Dictionary<MaskType, MaskBase>();
     
     //更改装配图标及名称
-    private void UpdateSlotUI()
+    public void UpdateSlotUI()
     {
         //更新装备信息存储字典
         if (equipmentDict.ContainsKey(Mask.MaskType))
