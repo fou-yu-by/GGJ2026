@@ -54,6 +54,7 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 		}
 		else
 		{
+			truePlayer = player; // 保存真正的玩家引用
 			playerStats = player.GetComponent<PlayerStats>();
 			if (playerStats == null)
 			{
@@ -270,21 +271,27 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 		player = null;
 		float minDistance = float.MaxValue;
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Monster");
+		GameObject nearestMonster = null;
 		foreach (GameObject enemy in enemies)
 		{
+			// 排除自己
+			if (enemy == gameObject) continue;
+			
 			Monster monsterComponent = enemy.GetComponent<Monster>();
-			if (monsterComponent != null && monsterComponent.IsActivated)
+			if (monsterComponent != null && monsterComponent.IsActivated && monsterComponent != this)
 			{
 				float distance = Vector2.Distance(transform.position, enemy.transform.position);
 				if (distance < minDistance)
 				{
 					minDistance = distance;
-					player = enemy;
+					nearestMonster = enemy;
 				}
 			}
 		}
-		if(player != null)
+		
+		if (nearestMonster != null)
 		{
+			player = nearestMonster;
 			Debug.Log($"{gameObject.name}: 将攻击目标设为 {player.name}");
 		}
 		else
@@ -301,7 +308,14 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 	/// <summary>
 	/// 互相攻击结束时的回调
 	/// </summary>
-	protected virtual void OnAggroEnd() { }
+	protected virtual void OnAggroEnd() 
+	{
+		// 恢复真正的玩家作为目标
+		if (truePlayer != null)
+		{
+			player = truePlayer;
+		}
+	}
 
 	
 

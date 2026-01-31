@@ -164,7 +164,8 @@ MonoBehaviour:
   maxHp: 50
   attackPower: 5
   collisionCooldown: 1
-  parentObject: {fileID: 0}
+  parentObject: {fileID: 8100050604494745422}
+  monsterAttackInterval: 1
   moveSpeed: 5
   movediffrange: 1
 --- !u!1 &7529637617456095995
@@ -311,7 +312,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -333,5 +334,6 @@ MonoBehaviour:
   attackPower: 5
   collisionCooldown: 1
   parentObject: {fileID: 0}
-  moveSpeed: 10
-  movediffrange: 1
+  monsterAttackInterval: 1
+  moveSpeed: 7
+  movediffrange: 2
