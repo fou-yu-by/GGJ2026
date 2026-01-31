@@ -4,6 +4,13 @@ public class Monster1 : Monster
 {
 	[Header("Movement")]
 	[SerializeField] protected float moveSpeed = 5f;
+	private float actualMoveSpeed;
+
+	protected override void Awake()
+	{
+		base.Awake();
+		actualMoveSpeed = moveSpeed + Random.Range(-0.5f, 0.5f);
+	}
 
 	protected override void Move()
 	{
@@ -13,7 +20,7 @@ public class Monster1 : Monster
 		}
 
 		Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
-		transform.Translate(directionToPlayer * moveSpeed * Time.deltaTime);
+		transform.Translate(directionToPlayer * actualMoveSpeed * Time.deltaTime);
 	}
 
 	protected override void OnPlayerCollision(GameObject playerObject)
