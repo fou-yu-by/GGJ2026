@@ -1208,6 +1208,7 @@ GameObject:
   - component: {fileID: 1418837976}
   - component: {fileID: 1418837975}
   - component: {fileID: 1418837974}
+  - component: {fileID: 1418837977}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1236,8 +1237,8 @@ MonoBehaviour:
   damageMultiplier: 5
   checkTargetDistance: 20
   damageRange: 5
-  skillImage: {fileID: 21300000, guid: 66e35897d7abff2459d3f099578584b6, type: 3}
   flySpeed: 3
+  skillImage: {fileID: 21300000, guid: 66e35897d7abff2459d3f099578584b6, type: 3}
   FireBallPrefab: {fileID: 0}
 --- !u!114 &1418837975
 MonoBehaviour:
@@ -1251,10 +1252,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56807397a8be6f4d858793d6af3c7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillImage: {fileID: 185955615}
   FireBallSkill: {fileID: 0}
-  canUseFireBall: 0
+  ArrowSkill: {fileID: 0}
+  skillImage: {fileID: 185955615}
   CDUI: {fileID: 1396867784}
+  canUseFireBall: 0
+  canUseArrow: 0
 --- !u!4 &1418837976
 Transform:
   m_ObjectHideFlags: 0
@@ -1270,6 +1273,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1418837977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418837973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc2d09068311154487fd9c0afad517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 10
+  unlockedMasks:
+  - {fileID: 11400000, guid: 438ce083753d00b459f505a6b397777b, type: 2}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damageMultiplier: 10
+  checkTargetDistance: 0
+  damageRange: 0
+  flySpeed: 5
+  skillImage: {fileID: 0}
+  arrowPrefab: {fileID: 0}
 --- !u!1 &1490267664
 GameObject:
   m_ObjectHideFlags: 0
