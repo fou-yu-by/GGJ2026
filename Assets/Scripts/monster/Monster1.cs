@@ -19,12 +19,16 @@ public class Monster1 : Monster
 	protected override void OnPlayerCollision(GameObject playerObject)
 	{
 		Debug.Log("Monster1: 与玩家发生碰撞");
-		Attack();
+		Debug.Log($"Monster1: 对玩家进行攻击，攻击力 = {attackPower}");
+		if (playerStats != null)
+		{
+			playerStats.TakeDamage(attackPower);
+		}
 	}
 
 	protected override void Attack()
 	{
-		
-		Debug.Log($"Monster1: 对玩家进行攻击，攻击力 = {attackPower}");
+
+		// Debug.Log($"Monster1: 对玩家进行攻击，攻击力 = {attackPower}");
 	}
 }
