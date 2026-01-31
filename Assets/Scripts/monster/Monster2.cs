@@ -40,7 +40,7 @@ public class Monster2 : Monster
 	{
 		base.Update();
 		
-		if (!isActivated || player == null) return;
+		if (!isActivated || player == null || isDizzy) return;
 		
 		// 更新射击计时器
 		fireTimer -= Time.deltaTime;
@@ -59,7 +59,7 @@ public class Monster2 : Monster
 
 	protected override void Move()
 	{
-		if (player == null) return;
+		if (player == null || isDizzy) return;
 
 		Vector2 currentPos = transform.position;
 		Vector2 playerPos = player.transform.position;
@@ -242,7 +242,7 @@ public class Monster2 : Monster
 			bulletComponent = bullet.AddComponent<MonsterBullet>();
 		}
 		
-		bulletComponent.Initialize(direction, bulletSpeed, bulletRange, attackPower, obstacleLayer);
+		bulletComponent.Initialize(direction, bulletSpeed, bulletRange, attackPower, obstacleLayer,isAggroToMonsters);
 	}
 
 	protected override void OnPlayerCollision(GameObject playerObject)
