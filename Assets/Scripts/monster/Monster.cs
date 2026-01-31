@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Monster : MonoBehaviour
+public abstract class Monster : MonoBehaviour,IGetAOEEffect
 {
 	[Header("Stats")]
 	[SerializeField] protected int maxHp = 100;
@@ -17,6 +17,9 @@ public abstract class Monster : MonoBehaviour
 	protected float collisionCooldownTimer = 0f;
 	protected bool isActivated = false;
 
+	//TODO:创建了一个用于控制全体眩晕的布尔值
+	protected bool isDizzy = false;
+	
 	protected virtual void Awake()
 	{
 		currentHp = Mathf.Clamp(currentHp == 0 ? maxHp : currentHp, 0, maxHp);
@@ -134,5 +137,11 @@ public abstract class Monster : MonoBehaviour
 			collisionCooldownTimer = collisionCooldown;
 			OnPlayerCollision(other);
 		}
+	}
+	
+	//TODO:实现AOE效果
+	public void GetAOEEffect()
+	{
+		
 	}
 }

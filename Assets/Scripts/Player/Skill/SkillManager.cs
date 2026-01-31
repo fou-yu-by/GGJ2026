@@ -9,6 +9,8 @@ public class SkillManager : Singleton<SkillManager>
     public FireBallSkill FireBallSkill;
     
     public bool canUseFireBall;
+
+    public Slider CDUI;
     
     protected override void Awake()
     {
