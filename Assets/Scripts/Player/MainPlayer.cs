@@ -11,6 +11,11 @@ public class MainPlayer : Singleton<MainPlayer>
     [HideInInspector]public PlayerStats playerStats;
     private Rigidbody2D rb;
     
+    [Header("动画")]
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private bool isFacingLeft = true; // 默认朝左
+    
     [Header("移动")]
     private Vector2 inputMovement;
     [SerializeField] private float moveSpeed;
@@ -26,7 +31,8 @@ public class MainPlayer : Singleton<MainPlayer>
         playerInput = GetComponent<PlayerInput>();
         rb =  GetComponent<Rigidbody2D>();
         playerStats = GetComponent<PlayerStats>();
-
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -110,6 +116,7 @@ public class MainPlayer : Singleton<MainPlayer>
     private void Update()
     {
         Move();
+        UpdateAnimation();
     }
 
     void Move()
@@ -123,6 +130,49 @@ public class MainPlayer : Singleton<MainPlayer>
             rb.velocity = Vector2.zero;
         }
     }
+    
+    #region 动画控制
+    
+    /// <summary>
+    /// 更新动画状态
+    /// </summary>
+    private void UpdateAnimation()
+    {
+        // 计算速度并设置Speed参数（用于Standing和Walking状态切换）
+        float speed = rb.velocity.magnitude;
+        animator.SetFloat("Speed", speed);
+        
+        // 处理左右朝向（只在有水平输入时更新朝向）
+        if (inputMovement.x != 0)
+        {
+            // 输入向左时朝左，输入向右时朝右
+            isFacingLeft = inputMovement.x < 0;
+            // 默认精灵朝左，所以向右时需要翻转
+            spriteRenderer.flipX = !isFacingLeft;
+        }
+        if (playerStats.currentHealth <= 0)
+        {
+            PlayDeathAnimation();
+        }
+    }
+    
+    /// <summary>
+    /// 触发死亡动画
+    /// </summary>
+    public void PlayDeathAnimation()
+    {
+        animator.SetBool("isDead", true);
+    }
+    
+    /// <summary>
+    /// 获取当前朝向（用于攻击等需要方向的操作）
+    /// </summary>
+    public Vector2 GetFacingDirection()
+    {
+        return isFacingLeft ? Vector2.left : Vector2.right;
+    }
+    
+    #endregion
     
     //拾取面具,由面具Trigger触发
     public void PickUpTheMask(MaskBase mask, GameObject hit)
