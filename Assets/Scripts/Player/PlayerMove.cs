@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MainPlayer : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class MainPlayer : MonoBehaviour
     private PlayerStats playerStats;
     private Rigidbody2D rb;
     
-    
     [Header("移动")]
     private Vector2 inputMovement;
     [SerializeField] private float moveSpeed;
 
-    public bool isAttack;
+    private bool isAttack;
+    private bool isPickUp;
+    
     [SerializeField] private LayerMask enemyLayer;
     
     private void Awake()
@@ -23,7 +25,9 @@ public class MainPlayer : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb =  GetComponent<Rigidbody2D>();
         playerStats = GetComponent<PlayerStats>();
+
     }
+
 
     private void OnEnable()
     {
@@ -32,15 +36,32 @@ public class MainPlayer : MonoBehaviour
         playerInput.actions["Move"].canceled += HandleMove;
 
         playerInput.actions["Attack"].started += HandleAttack;
-    }
 
+        playerInput.actions["SwitchMask"].performed += HandlePickUp;
+        playerInput.actions["SwitchMask"].canceled += CancelPickUp;
+    }
 
     private void OnDisable()
     {
         playerInput.actions["Move"].Disable();
         playerInput.actions["Move"].performed -= HandleMove;
         playerInput.actions["Move"].canceled -= HandleMove;
+        
+        playerInput.actions["SwitchMask"].performed -= HandlePickUp;
+        playerInput.actions["SwitchMask"].canceled -= CancelPickUp;
+        
     }
+    private void CancelPickUp(InputAction.CallbackContext ctx)
+    {
+        isPickUp = false;
+    }
+
+    private void HandlePickUp(InputAction.CallbackContext ctx)
+    {
+        isPickUp = true;
+    }
+
+
     private void HandleAttack(InputAction.CallbackContext ctx)
     {
         isAttack = true;
@@ -78,8 +99,17 @@ public class MainPlayer : MonoBehaviour
         }
     }
     
-    
-    
-    
-    
+    //拾取面具,由面具Trigger触发
+    public void PickUpTheMask(MaskBase mask)
+    {
+        if (isPickUp)
+        {
+            EquipManager.Instance.Mask = mask;
+            EquipManager.Instance.UpdateSlotUI();
+            Debug.Log(EquipManager.Instance.equipmentDict);
+        }
+    }
+
+
+
 }

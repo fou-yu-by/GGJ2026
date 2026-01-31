@@ -8,6 +8,8 @@ public class TransitionManager : Singleton<TransitionManager>
 {
     public string startScene;
     [HideInInspector]public string currentScene;
+    public GameObject PlayerSceneUI;
+    
     
     protected override void Awake()
     {
@@ -18,6 +20,18 @@ public class TransitionManager : Singleton<TransitionManager>
     private void Start()
     {
         TransitionToScene(string.Empty, startScene);
+    }
+
+    private void Update()
+    {
+        if (currentScene == startScene)
+        {
+            PlayerSceneUI.SetActive(false);
+        }
+        else
+        {
+            PlayerSceneUI.SetActive(true);
+        }
     }
 
     public void TransitionToScene(string from, string to)

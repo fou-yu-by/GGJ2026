@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaskType: 1
   MaskName: Warrior Mask
-  MaskIcon: {fileID: 0}
+  MaskIcon: {fileID: 21300000, guid: 66e35897d7abff2459d3f099578584b6, type: 3}
   MaskModifiers:
   - modifierName: damage
     modifierValue: 10
