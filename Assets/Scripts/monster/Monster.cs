@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Monster : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public abstract class Monster : MonoBehaviour
 	protected PlayerStats playerStats;
 	protected float collisionCooldownTimer = 0f;
 
+	// private Slider HealthUI;
 	protected virtual void Awake()
 	{
 		currentHp = Mathf.Clamp(currentHp == 0 ? maxHp : currentHp, 0, maxHp);
 		CachePlayer();
+		// HealthUI = GetComponentInChildren<Slider>();
 	}
 
 	protected virtual void Start()
@@ -24,6 +27,9 @@ public abstract class Monster : MonoBehaviour
 		{
 			CachePlayer();
 		}
+
+		// HealthUI.maxValue = maxHp;
+		// HealthUI.value = currentHp;
 	}
 
 	protected void CachePlayer()
@@ -73,6 +79,7 @@ public abstract class Monster : MonoBehaviour
 	public virtual void TakeDamage(int damage)
 	{
 		currentHp -= damage;
+		// HealthUI.value = currentHp;
 		Debug.Log($"Monster: 受到 {damage} 点伤害，剩余血量 {currentHp}");
 		if (currentHp <= 0)
 		{

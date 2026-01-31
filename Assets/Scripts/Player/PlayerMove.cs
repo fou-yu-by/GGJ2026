@@ -77,4 +77,9 @@ public class MainPlayer : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
+    
+    
+    
+    
+    
 }
