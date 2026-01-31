@@ -48,8 +48,11 @@ public class MainPlayer : MonoBehaviour
         
         Debug.DrawLine(transform.position,attackDirection * playerStats.attackDistance.GetValue(), Color.red);
         var hits = Physics2D.RaycastAll(transform.position, attackDirection, enemyLayer);
-        //TODO:hits里的每一个enemy执行受伤逻辑
-  
+        //hits里的每一个enemy执行受伤逻辑
+        foreach (var enemy in hits)
+        {
+            enemy.transform.GetComponent<Monster>().TakeDamage(playerStats.damage.GetValue());
+        }
         
     }
 
