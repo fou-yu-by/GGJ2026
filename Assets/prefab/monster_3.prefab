@@ -341,7 +341,7 @@ MonoBehaviour:
   distanceTolerance: 1
   bulletPrefab: {fileID: 6479362869832307008, guid: c8c09c487e59f3a44a266584d770f104, type: 3}
   bulletSpeed: 10
-  bulletRange: 15
+  bulletRange: 30
   fireRate: 1.5
   firePoint: {fileID: 6728714646010421889}
   obstacleCheckDistance: 2
