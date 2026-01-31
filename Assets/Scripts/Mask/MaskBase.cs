@@ -22,4 +22,5 @@ public class MaskModifier
 {
    public string modifierName;
    public int modifierValue;
+   public float modifierDuration;
 }

@@ -6,12 +6,30 @@ using UnityEngine;
 public class MaskPrefab : MonoBehaviour
 {
     public MaskBase mask;
-
-    private void OnTriggerStay2D(Collider2D other)
+    public LayerMask playerMask;
+    
+    private void OnEnable()
     {
-        if (other != null && other.CompareTag("Player"))
+        EventManager.Instance.AddListener("AfterPickUpTheMask", OnAfterPickUpTheMask);
+    }
+
+    private void OnAfterPickUpTheMask(object sender, EventArgs e)
+    {
+        Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        CheckPlayer();
+    }
+
+    private void CheckPlayer()
+    {
+        var hit =  Physics2D.OverlapCircle(transform.position, 1.0f, playerMask);
+        if (hit != null && hit.GetComponent<MainPlayer>() != null)
         {
-            other.GetComponent<MainPlayer>().PickUpTheMask(mask);
+            hit.GetComponent<MainPlayer>().PickUpTheMask(mask);
         }
+        
     }
 }

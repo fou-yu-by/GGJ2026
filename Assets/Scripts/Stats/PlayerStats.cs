@@ -1,4 +1,5 @@
 
+using UnityEngine;
 using UnityEngine.UI;
 public class PlayerStats : CharacterStats
 {
@@ -7,7 +8,7 @@ public class PlayerStats : CharacterStats
     protected override void Start()
     {
         base.Start();
-        healthText.text = $"{base.currentHealth.ToString()}" + "/" +$"{base.currentHealth.ToString()}";
+        UpdateHealthBar();
     }
 
     public override void TakeDamage(int _damage)
@@ -17,5 +18,13 @@ public class PlayerStats : CharacterStats
         {
             healthText.text = $"{base.currentHealth.ToString()}" + "/" + $"{base.healthBar.maxValue.ToString()}";
         }
+    }
+
+    public void UpdateHealthBar()
+    {
+        currentHealth += Mathf.RoundToInt(health.GetValue() - healthBar.maxValue);
+        healthBar.maxValue = health.GetValue();
+        healthBar.value = currentHealth;
+        healthText.text = $"{base.currentHealth.ToString()}" + "/" + $"{base.healthBar.maxValue.ToString()}";
     }
 }
