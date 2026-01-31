@@ -7,6 +7,7 @@ public class EquipManager : Singleton<EquipManager>
 {
     public Image professionSlot;
     public Image emotionSlot;
+    public Image SkillSlot;
 
     public MaskBase Mask;
     
