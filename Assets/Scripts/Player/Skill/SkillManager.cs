@@ -21,7 +21,6 @@ public class SkillManager : Singleton<SkillManager>
         //获取当前装备的面具
         skillMask = EquipManager.Instance.Mask;
         
-        Debug.Log(SkillType.FireBall.ToString());
     }
 
     private void Update()
@@ -48,10 +47,14 @@ public class SkillManager : Singleton<SkillManager>
 
         if (canUseFireBall)
         {
-            Debug.Log("!!!");
             this.skillImage.sprite = FireBallSkill.skillImage;
             this.skillImage.GetComponentInChildren<Text>().text = SkillType.FireBall.ToString();
             
+        }
+        else //当前无任何可用技能时
+        {
+            this.skillImage.sprite = null;
+            this.skillImage.GetComponentInChildren<Text>().text = "";
         }
     }
 
@@ -65,7 +68,9 @@ public class SkillManager : Singleton<SkillManager>
                 canUseFireBall = true;
                 return;
             }
+            
         }
+        canUseFireBall = false;
     }
 
     

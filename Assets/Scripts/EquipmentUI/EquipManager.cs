@@ -7,7 +7,8 @@ public class EquipManager : Singleton<EquipManager>
 {
     public Image professionSlot;
     public Image emotionSlot;
-
+    
+    public GameObject maskPrefab;
     public MaskBase Mask;
     
     //存储当前装备的面具信息（面具类型：面具）
@@ -16,13 +17,17 @@ public class EquipManager : Singleton<EquipManager>
     //更改装配图标及名称
     public void UpdateSlotUI()
     {
+        MaskBase oldMask;
         //更新装备信息存储字典
         if (equipmentDict.ContainsKey(Mask.MaskType))
         {
+            //获取上一个装备的面具以便实现掉落逻辑
+            oldMask = equipmentDict[Mask.MaskType];
             equipmentDict[Mask.MaskType] = Mask;
         }
         else
         {
+            oldMask = null;
             equipmentDict.Add(Mask.MaskType, Mask);
         }
         //更新UI
@@ -35,6 +40,13 @@ public class EquipManager : Singleton<EquipManager>
         {
             emotionSlot.sprite = ((EmotionMask)Mask).MaskIcon;
             emotionSlot.GetComponentInChildren<Text>().text = Mask.MaskName;
+        }
+        
+        //实现上一个面具的掉落
+        if (oldMask != null)
+        {
+           GameObject dropMask = Instantiate(maskPrefab, MainPlayer.Instance.transform.position, Quaternion.identity);
+           dropMask.GetComponent<MaskPrefab>().mask = oldMask;
         }
         
     }
