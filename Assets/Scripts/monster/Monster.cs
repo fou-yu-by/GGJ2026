@@ -9,6 +9,7 @@ public abstract class Monster : MonoBehaviour
 
 	protected int currentHp;
 	protected GameObject player;
+	protected PlayerStats playerStats;
 	protected float collisionCooldownTimer = 0f;
 
 	protected virtual void Awake()
@@ -30,7 +31,15 @@ public abstract class Monster : MonoBehaviour
 		player = GameObject.Find("Player");
 		if (player == null)
 		{
-			Debug.LogWarning("Monster: 未找到名为 'player' 的对象。");
+			Debug.LogWarning("Monster: 未找到名为 'Player' 的对象。");
+		}
+		else
+		{
+			playerStats = player.GetComponent<PlayerStats>();
+			if (playerStats == null)
+			{
+				Debug.LogWarning("Monster: Player 上未找到 PlayerStats 组件。");
+			}
 		}
 	}
 
@@ -59,6 +68,22 @@ public abstract class Monster : MonoBehaviour
 
 	protected virtual void Attack()
 	{
+	}
+
+	public virtual void TakeDamage(int damage)
+	{
+		currentHp -= damage;
+		Debug.Log($"Monster: 受到 {damage} 点伤害，剩余血量 {currentHp}");
+		if (currentHp <= 0)
+		{
+			Die();
+		}
+	}
+
+	protected virtual void Die()
+	{
+		Debug.Log("Monster: 死亡");
+		Destroy(gameObject);
 	}
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision)
