@@ -8,7 +8,7 @@ public class A : MonoBehaviour
 
 	private float flySpeed;
 	[SerializeField] private LayerMask enemyLayer;
-	private int damage;
+	private int damage = 10;
 	private Vector3 direction;
 
 	private void Awake()
