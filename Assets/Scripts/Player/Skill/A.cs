@@ -9,6 +9,7 @@ public class A : MonoBehaviour
 	private float flySpeed;
 	[SerializeField] private LayerMask enemyLayer;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	private int damage = 10;
 =======
 	private int damage=10;
