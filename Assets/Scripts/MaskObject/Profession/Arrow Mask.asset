@@ -19,7 +19,7 @@ MonoBehaviour:
   MaskModifiers:
   - modifierName: damage
     modifierValue: 5
-    modifierDuration: 0
+    modifierDuration: 10
   - modifierName: moveSpeed
     modifierValue: 3
-    modifierDuration: 0
+    modifierDuration: 3
