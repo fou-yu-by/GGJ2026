@@ -13,6 +13,7 @@ public class GameOver : MonoBehaviour
 
     IEnumerator GameOverCoroutine()
     {
+        yield return new WaitForSeconds(10);
         while (true)
         {
             if (GameObject.FindGameObjectWithTag("Monster") == null) ;
@@ -23,9 +24,6 @@ public class GameOver : MonoBehaviour
             }
             yield return null;
         }
-        
-        
-        
         
     }
 }

@@ -30,6 +30,7 @@ public class MainPlayer : Singleton<MainPlayer>
     private float switchMaskTimer = 0f;
     
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private GameObject attackPrefab;
     
     protected override void Awake()
     {
@@ -121,15 +122,16 @@ public class MainPlayer : Singleton<MainPlayer>
     private void HandleAttack(InputAction.CallbackContext ctx)
     {
         isAttack = true;
-        Vector3 attackDirection = inputMovement.normalized;
-        
-        Debug.DrawLine(transform.position,attackDirection * playerStats.attackDistance.GetValue(), Color.red);
-        var hits = Physics2D.RaycastAll(transform.position, attackDirection, enemyLayer);
-        //hits里的每一个enemy执行受伤逻辑
-        foreach (var enemy in hits)
-        {
-            enemy.transform.GetComponent<Monster>()?.TakeDamage(playerStats.damage.GetValue());
-        }
+        Vector3 attackDirection = inputMovement != Vector2.zero
+            ? inputMovement.normalized
+            : lastDirection;
+
+        if (attackPrefab == null)
+            return;
+
+        GameObject attack = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+        attack.GetComponent<A>()?.SetDefaultValues(playerStats.attackDistance.GetValue(),
+            playerStats.damage.GetValue(), attackDirection);
         
     }
 
