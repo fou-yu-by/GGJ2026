@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 1014214567
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f62565bd6eae8f14c90a4af1bc7db358, type: 3}
+  m_Color: {r: 0.32156864, g: 0.20392159, b: 0.2509804, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,8 +146,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: -0.34982443, y: 0.42756557}
+  m_Size: {x: 8.07426, y: 9.784519}
   m_Direction: 0
 --- !u!114 &330372333053380448
 MonoBehaviour:
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8547295141167755932}
   - component: {fileID: 7494365904023904194}
   - component: {fileID: 8262945846270795136}
+  - component: {fileID: 5923185650209085215}
   m_Layer: 6
   m_Name: monster_1
   m_TagString: Monster
@@ -199,8 +200,8 @@ Transform:
   m_GameObject: {fileID: 7529637617456095995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2, y: 3.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.7852, y: 4.137, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6566542559214409898}
@@ -247,8 +248,8 @@ SpriteRenderer:
   m_SortingLayerID: 1014214567
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f62565bd6eae8f14c90a4af1bc7db358, type: 3}
+  m_Color: {r: 0.735849, g: 0.6143645, b: 0.6606443, a: 0.56078434}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -317,8 +318,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: -0.07773876, y: 0.6996566}
+  m_Size: {x: 4.109564, y: 9.706789}
   m_Direction: 0
 --- !u!114 &7494365904023904194
 MonoBehaviour:
@@ -368,3 +369,24 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -129
+--- !u!95 &5923185650209085215
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529637617456095995}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce8a96ec4aec8bb468e71741e8b337c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
