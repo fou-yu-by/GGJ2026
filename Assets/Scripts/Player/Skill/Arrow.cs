@@ -19,7 +19,6 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = MainPlayer.Instance.inputMovement * flySpeed;
     }
     
 
@@ -27,7 +26,12 @@ public class Arrow : MonoBehaviour
     {
         this.flySpeed = flySpeed;
         this.damage = damage;
-        this.direction = direction;
+        this.direction = direction.normalized;
+        
+        // 在设置完参数后再设置速度
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+        rb.velocity = this.direction * flySpeed * 4;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,11 +40,11 @@ public class Arrow : MonoBehaviour
         {
             other.GetComponent<Monster>().TakeDamage(damage);
         }
-        // else if (other.CompareTag("Wall")) //TODO:射中墙体之后留在墙体上
-        // {
-        //     transform.SetParent(other.transform);
-        //     rb.bodyType = RigidbodyType2D.Kinematic;
-        //     rb.velocity = Vector2.zero;
-        // }
+        else if (other.CompareTag("Wall")) //TODO:射中墙体之后留在墙体上
+        {
+            transform.SetParent(other.transform);
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+        }
     }
 }

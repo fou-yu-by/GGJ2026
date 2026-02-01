@@ -18,7 +18,7 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 	protected GameObject truePlayer;
 	protected PlayerStats playerStats;
 	protected float collisionCooldownTimer = 0f;
-	protected bool isActivated = false;
+	public bool isActivated = false;
 
 	// 眩晕控制
 	protected bool isDizzy = false;

@@ -10,36 +10,35 @@ public class FireBallSkill : Skill
     protected override void UseSkill()
     {
         base.UseSkill();
-        //在20mi内时发射
-        if (CheckNearestTarget() != null)
+        
+        float rotateAngle;
+        Vector2 shootDirection;
+        Transform target = CheckNearestTarget();
+        
+        if (target != null)
         {
-            Vector3 direction = (CheckNearestTarget().position - MainPlayer.Instance.transform.position).normalized;
-            float rotateAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            // 朝向最近的激活怪物发射（追踪模式）
+            shootDirection = (target.position - MainPlayer.Instance.transform.position).normalized;
+            
+            // 火球的Sprite默认朝下，所以需要加90度
+            rotateAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg + 90f;
             GameObject fireBall = Instantiate(FireBallPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0f, 0f, rotateAngle));
-            fireBall.GetComponent<FireBall>().CacheTarget(CheckNearestTarget(), flySpeed, 
+            fireBall.GetComponent<FireBall>().CacheTarget(target, flySpeed, 
                 Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier), damageRange);
         }
         else
         {
+            // 没有怪物时，使用当前移动方向，如果静止则使用最近的方向
+            shootDirection = MainPlayer.Instance.inputMovement != Vector2.zero 
+                ? MainPlayer.Instance.inputMovement 
+                : MainPlayer.Instance.lastDirection;
             
-            if (MainPlayer.Instance.inputMovement != Vector2.zero)
-            {
-                float angle = Mathf.Atan2(MainPlayer.Instance.inputMovement.y, MainPlayer.Instance.inputMovement.x) * Mathf.Rad2Deg;
-                GameObject fireBall = Instantiate(FireBallPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0f, 0f, angle));
-                fireBall.GetComponent<FireBall>().rb.velocity = MainPlayer.Instance.inputMovement * flySpeed;
-                fireBall.GetComponent<FireBall>().SetDefaultValue(flySpeed,
-                    Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier));
-            }
-            else
-            {
-                GameObject fireBall = Instantiate(FireBallPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0f, 0f, 90f));
-                fireBall.GetComponent<FireBall>().rb.velocity = Vector3.right * flySpeed;
-                fireBall.GetComponent<FireBall>().SetDefaultValue(flySpeed,
-                    Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier));
-                
-            }
-
-            
+            // 火球的Sprite默认朝下，所以需要加90度
+            rotateAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg + 90f;
+            GameObject fireBall = Instantiate(FireBallPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0f, 0f, rotateAngle));
+            fireBall.GetComponent<FireBall>().rb.velocity = shootDirection.normalized * flySpeed;
+            fireBall.GetComponent<FireBall>().SetDefaultValue(flySpeed,
+                Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier));
         }
     }
 

@@ -27,8 +27,8 @@ public class FireBall : MonoBehaviour
     {
         if(target == null) return;
         else{ rb.velocity = (target.position - transform.position).normalized * flySpeed;}
-        Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
-        transform.LookAt(targetPosition);
+        // Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        // transform.LookAt(targetPosition);
         TriggerBomb();
     }
 
