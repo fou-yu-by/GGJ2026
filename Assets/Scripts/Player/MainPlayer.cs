@@ -22,6 +22,7 @@ public class MainPlayer : Singleton<MainPlayer>
 
     private bool isAttack;
     private bool isPickUp;
+    private bool isUseSkill;
     
     [SerializeField] private LayerMask enemyLayer;
     
@@ -33,6 +34,11 @@ public class MainPlayer : Singleton<MainPlayer>
         playerStats = GetComponent<PlayerStats>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        moveSpeed = playerStats.moveSpeed.GetValue();
     }
 
 
@@ -47,6 +53,9 @@ public class MainPlayer : Singleton<MainPlayer>
 
         playerInput.actions["SwitchMask"].performed += HandlePickUp;
         playerInput.actions["SwitchMask"].canceled += CancelPickUp;
+        
+        playerInput.actions["UseMask"].performed += HandleUseMask;
+        playerInput.actions["UseMask"].canceled += HandleUseMask;
         
         //Event
         EventManager.Instance.AddListener("ChangeModifierEvent", OnChangeModifierEvent);
@@ -66,10 +75,14 @@ public class MainPlayer : Singleton<MainPlayer>
         playerInput.actions["SwitchMask"].performed -= HandlePickUp;
         playerInput.actions["SwitchMask"].canceled -= CancelPickUp;
         
+        playerInput.actions["UseMask"].performed -= HandleUseMask;
+        playerInput.actions["UseMask"].canceled -= CancelUseMask;
         //Event
         
         
     }
+
+
     private void OnChangeModifierEvent(object sender, EventArgs e)
     {
         PlayerArgs args = e as PlayerArgs;
@@ -80,6 +93,15 @@ public class MainPlayer : Singleton<MainPlayer>
     }
 
     #region 用户输入获取
+    private void HandleUseMask(InputAction.CallbackContext obj)
+    {
+        isUseSkill = true;
+    }
+
+    private void CancelUseMask(InputAction.CallbackContext obj)
+    {
+        isUseSkill = false;
+    }
     private void CancelPickUp(InputAction.CallbackContext ctx)
     {
         isPickUp = false;
@@ -117,6 +139,7 @@ public class MainPlayer : Singleton<MainPlayer>
     {
         Move();
         UpdateAnimation();
+        UseCurrentMaskSkill();
     }
 
     void Move()
@@ -203,6 +226,10 @@ public class MainPlayer : Singleton<MainPlayer>
     {
         if (mask.MaskModifiers.Count > 0)
         {
+            playerStats.health.modifiers.Clear();
+            playerStats.moveSpeed.modifiers.Clear();
+            playerStats.damage.modifiers.Clear();
+            playerStats.attackDistance.modifiers.Clear();
             //即面具存在buff效果
             foreach (var modifier in mask.MaskModifiers)
             {
@@ -228,9 +255,42 @@ public class MainPlayer : Singleton<MainPlayer>
 
                 
             }
+
+            playerStats.moveSpeed.GetValue();
+            playerStats.damage.GetValue();
+            playerStats.health.GetValue();
+            playerStats.attackDistance.GetValue();
         }
     }
 
+    public void UseCurrentMaskSkill()
+    {
+        if (isUseSkill)
+        {
+            
+            
+            if (SkillManager.Instance.canUseFireBall == true)
+            {
+                isUseSkill = SkillManager.Instance.FireBallSkill.CanUseSkill();
+                
+            }
+            else if (SkillManager.Instance.canUseArrow == true)
+            {
+                isUseSkill = SkillManager.Instance.ArrowSkill.CanUseSkill();
+                
+            }
+            else if (SkillManager.Instance.canUseJoyHalo == true)
+            {
+                isUseSkill = SkillManager.Instance.JoyHaloSkill.CanUseSkill();
+                
+            }
+            else if (SkillManager.Instance.canUseMadHalo == true)
+            {
+                isUseSkill = SkillManager.Instance.MadHaloSkill.CanUseSkill();
+                
+            }
+        }
+    }
 
 
 }

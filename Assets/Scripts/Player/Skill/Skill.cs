@@ -60,6 +60,9 @@ public class Skill : MonoBehaviour
         }
         return nearestTarget;
     }
-    
+    public float GetCurrentCDCondition()
+    {
+        return Mathf.Clamp(coolDownTimer / coolDown, 0, 1);
+    }
     
 }

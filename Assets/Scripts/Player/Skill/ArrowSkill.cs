@@ -14,13 +14,17 @@ public class ArrowSkill : Skill
         {
             rotateAngle = Mathf.Atan2(MainPlayer.Instance.inputMovement.y, MainPlayer.Instance.inputMovement.x) *
                                 Mathf.Rad2Deg;
+        GameObject arrow = Instantiate(arrowPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0, 0, rotateAngle));
+        arrow.GetComponent<Arrow>().SetDefaultValues(flySpeed,
+            Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier), MainPlayer.Instance.inputMovement);
         }
         else
         {
             rotateAngle = 0f;
+            GameObject arrow = Instantiate(arrowPrefab, MainPlayer.Instance.transform.position, Quaternion.Euler(0, 0, rotateAngle));
+            arrow.GetComponent<Arrow>().SetDefaultValues(flySpeed,
+                Mathf.RoundToInt(MainPlayer.Instance.playerStats.damage.GetValue() * damageMultiplier), Vector2.right);
         }
         
-        GameObject arrow = Instantiate(arrowPrefab, transform.position, Quaternion.Euler(0, 0, rotateAngle));
-        Destroy(arrow, 4f);
     }
 }

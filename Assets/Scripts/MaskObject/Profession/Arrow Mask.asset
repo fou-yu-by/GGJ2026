@@ -15,7 +15,7 @@ MonoBehaviour:
   MaskType: 1
   SkillType: 3
   MaskName: Arrow Mask
-  MaskIcon: {fileID: 0}
+  MaskIcon: {fileID: -1992183414, guid: 920a56d815bf48b4d8df088c8da0fbf7, type: 3}
   MaskModifiers:
   - modifierName: damage
     modifierValue: 5

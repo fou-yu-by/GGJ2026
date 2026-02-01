@@ -461,7 +461,7 @@ MonoBehaviour:
     baseValue: 100
     modifiers: 
   moveSpeed:
-    baseValue: 0
+    baseValue: 8
     modifiers: 
   attackDistance:
     baseValue: 100
