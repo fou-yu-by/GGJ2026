@@ -16,7 +16,7 @@ public class GameOver : MonoBehaviour
         yield return new WaitForSeconds(10);
         while (true)
         {
-            if (GameObject.FindGameObjectWithTag("Monster") == null) ;
+            if (GameObject.FindGameObjectWithTag("Monster") == null) 
             {
                 yield return new WaitForSeconds(1);
                 TransitionManager.Instance.TransitionToScene(TransitionManager.Instance.currentScene, "Thanks");
