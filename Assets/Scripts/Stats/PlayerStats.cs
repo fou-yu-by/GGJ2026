@@ -18,6 +18,11 @@ public class PlayerStats : CharacterStats
         {
             healthText.text = $"{base.currentHealth.ToString()}" + "/" + $"{base.healthBar.maxValue.ToString()}";
         }
+
+        if (currentHealth - _damage < 0)
+        {
+            MainPlayer.Instance.PlayDeathAnimation();
+        }
     }
 
     public void UpdateHealthBar()
@@ -26,5 +31,12 @@ public class PlayerStats : CharacterStats
         healthBar.maxValue = health.GetValue();
         healthBar.value = currentHealth;
         healthText.text = $"{base.currentHealth.ToString()}" + "/" + $"{base.healthBar.maxValue.ToString()}";
+    }
+
+    public void DestroyPlayer()
+    {
+        Destroy(gameObject);
+        TransitionManager.Instance.TransitionToScene(TransitionManager.Instance.currentScene,TransitionManager.Instance.startScene);
+        
     }
 }
