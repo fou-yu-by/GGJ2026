@@ -21,7 +21,7 @@ public class PlayerStats : CharacterStats
 
         if (currentHealth - _damage < 0)
         {
-            MainPlayer.Instance.PlayDeathAnimation();
+            currentHealth -= 0;
         }
     }
 

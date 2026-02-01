@@ -36,7 +36,15 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         foreach (ISaveable saveable in _saveablelist)
         {
             SaveData saveData = saveable.GenerateSaveData();
-            _saveDataDic.Add(saveable.GetType().Name, saveData);
+            if (_saveDataDic.ContainsKey(saveable.GetType().Name))
+            {
+                _saveDataDic[saveable.GetType().Name] = saveData;
+                
+            }
+            else
+            {
+                _saveDataDic.Add(saveable.GetType().Name, saveData);
+            }
         }
 
         var finalPath = savePath + "data.json";
