@@ -1430,6 +1430,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ed52b5c36eb644d86ca10443e253de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 947903579}
+  targetCamera: {fileID: 1067724519}
+  useCustomBounds: 0
+  customBoundsCenterOffset: {x: 0, y: 0}
+  customBoundsSize: {x: 0, y: 0}
+  followSpeed: 5
+  showDebugInfo: 1
 --- !u!1 &1247319403
 GameObject:
   m_ObjectHideFlags: 0
