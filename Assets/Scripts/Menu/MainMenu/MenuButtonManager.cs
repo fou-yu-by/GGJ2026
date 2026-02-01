@@ -32,7 +32,7 @@ public class MenuButtonManager : MonoBehaviour,ISaveable
         isFirstGame = false;
         SaveLoadManager.Instance.Save();
         //TODO:“开始游戏”加载的场景名称
-        TransitionManager.Instance.TransitionToScene("MainMenu","GameScenexgp");
+        TransitionManager.Instance.TransitionToScene("MainMenu","Level1 1");
     }
 
     public void QuitGame()
