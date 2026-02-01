@@ -1240,7 +1240,7 @@ MonoBehaviour:
   checkTargetDistance: 20
   damageRange: 5
   flySpeed: 3
-  skillImage: {fileID: -1944710053, guid: 1a78545efc4e61a49a3e229cd2e8317a, type: 3}
+  skillImage: {fileID: 21300000, guid: fa91e790fb67a20498c16d9d84344431, type: 3}
   FireBallPrefab: {fileID: 6932390233177845132, guid: ff77faef56d15384ea4038d909b48a8d, type: 3}
 --- !u!114 &1418837975
 MonoBehaviour:
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   checkTargetDistance: 0
   damageRange: 0
   flySpeed: 5
-  skillImage: {fileID: -578825952, guid: 920a56d815bf48b4d8df088c8da0fbf7, type: 3}
+  skillImage: {fileID: 21300000, guid: b6aee13e59611034a832da2e5ab21630, type: 3}
   arrowPrefab: {fileID: 8246863360632295993, guid: 6015f3b4538164d42ae4304250748aa1, type: 3}
 --- !u!114 &1418837978
 MonoBehaviour:
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   checkTargetDistance: 0
   damageRange: 0
   flySpeed: 0
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 21300000, guid: e4d4f94cc2b3f6843bf526545db199fe, type: 3}
 --- !u!1 &1490267664
 GameObject:
   m_ObjectHideFlags: 0
