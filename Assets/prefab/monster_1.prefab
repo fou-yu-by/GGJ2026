@@ -164,9 +164,11 @@ MonoBehaviour:
   maxHp: 50
   attackPower: 5
   collisionCooldown: 1
-  parentObject: {fileID: 0}
+  parentObject: {fileID: 8100050604494745422}
+  monsterAttackInterval: 1
   moveSpeed: 5
   movediffrange: 1
+  pathUpdateInterval: 0.5
 --- !u!1 &7529637617456095995
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +182,7 @@ GameObject:
   - component: {fileID: 1573269284072660863}
   - component: {fileID: 8547295141167755932}
   - component: {fileID: 7494365904023904194}
+  - component: {fileID: 8262945846270795136}
   m_Layer: 6
   m_Name: monster_1
   m_TagString: Monster
@@ -196,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 7529637617456095995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.67, y: 2.02, z: 0}
+  m_LocalPosition: {x: -2.2, y: 3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -311,7 +314,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -333,5 +336,35 @@ MonoBehaviour:
   attackPower: 5
   collisionCooldown: 1
   parentObject: {fileID: 0}
-  moveSpeed: 10
-  movediffrange: 1
+  monsterAttackInterval: 1
+  moveSpeed: 4
+  movediffrange: 0.5
+  pathUpdateInterval: 0.2
+--- !u!114 &8262945846270795136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529637617456095995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 1
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -129
