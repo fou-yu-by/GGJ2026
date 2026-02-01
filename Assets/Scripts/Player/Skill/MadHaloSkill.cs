@@ -21,7 +21,7 @@ public class MadHaloSkill : Skill
 
         foreach (var monster in takeAOEMonsters)
         {
-            monster.GetAOEEffect(2,5);
+            monster.GetAOEEffect(2,3);
         }
 
     }

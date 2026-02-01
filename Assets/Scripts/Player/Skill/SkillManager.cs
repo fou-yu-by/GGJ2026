@@ -82,7 +82,7 @@ public class SkillManager : Singleton<SkillManager>
         else if (canUseMadHalo)
         {
             this.skillImage.sprite = MadHaloSkill.skillImage;
-            this.skillImage.GetComponent<Text>().text = SkillType.HaloOfAnger.ToString();
+            this.skillImage.GetComponentInChildren<Text>().text = SkillType.HaloOfAnger.ToString();
         }
         else //当前无任何可用技能时
         {

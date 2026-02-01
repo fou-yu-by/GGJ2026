@@ -124,7 +124,21 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 		}
 	}
 
-	protected virtual void Die()
+	/// <summary>
+	/// 攻击其他怪物（供 MonsterCollider 调用）
+	/// </summary>
+	public void AttackOtherMonster(Monster otherMonster)
+	{
+		if (otherMonster == null || !isAggroToMonsters) return;
+		if (monsterAttackTimer > 0f) return;
+		
+		monsterAttackTimer = monsterAttackInterval;
+		Debug.Log($"{gameObject.name}: 与怪物 {otherMonster.gameObject.name} 碰撞，双方摧毁");
+		otherMonster.Die();
+		Die();
+	}
+
+	public virtual void Die()
 	{
 		Debug.Log("Monster: 死亡");
 		Destroy(gameObject);
@@ -138,6 +152,24 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 	protected virtual void OnTriggerEnter2D(Collider2D collider)
 	{
 		TryHandlePlayerCollision(collider.gameObject);
+	}
+
+	protected virtual void OnCollisionStay2D(Collision2D collision)
+	{
+		// 互相攻击状态下持续检测碰撞以造成伤害
+		if (isAggroToMonsters)
+		{
+			TryHandlePlayerCollision(collision.gameObject);
+		}
+	}
+
+	protected virtual void OnTriggerStay2D(Collider2D collider)
+	{
+		// 互相攻击状态下持续检测碰撞以造成伤害
+		if (isAggroToMonsters)
+		{
+			TryHandlePlayerCollision(collider.gameObject);
+		}
 	}
 
 	private void TryHandlePlayerCollision(GameObject other)
@@ -154,15 +186,21 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 		if (isDizzy) return;
 		if (isAggroToMonsters)
 		{
-			// 互相攻击状态下，检测与其他怪物的碰撞
-			if (other.CompareTag("Monster") && monsterAttackTimer <= 0f)
+			Debug.Log($"{gameObject.name}: 处于互相攻击状态，检测与其他怪物的碰撞");
+			// 互相攻击状态下，检测与其他怪物的碰撞，直接摧毁双方
+			// 检查 other 本身或其父物体是否有 Monster tag
+			GameObject monsterObj = other.CompareTag("Monster") ? other : 
+				(other.transform.parent != null && other.transform.parent.CompareTag("Monster") ? other.transform.parent.gameObject : null);
+			
+			if (monsterObj != null && monsterAttackTimer <= 0f)
 			{
 				monsterAttackTimer = monsterAttackInterval;
-				Monster otherMonster = other.GetComponent<Monster>();
-				if (otherMonster != null)
+				Monster otherMonster = monsterObj.GetComponent<Monster>();
+				if (otherMonster != null && otherMonster != this)
 				{
-					Debug.Log($"{gameObject.name}: 攻击怪物 {other.name}，攻击力 = {attackPower}");
-					otherMonster.TakeDamage(attackPower);
+					Debug.Log($"{gameObject.name}: 与怪物 {monsterObj.name} 碰撞，双方摧毁");
+					otherMonster.Die();
+					Die();
 				}
 			}
 			return;
@@ -180,7 +218,7 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 	/// ID==1: 眩晕效果
 	/// ID==2: 互相攻击(monster之间互相攻击)
 	/// </summary>
-	public void GetAOEEffect(int effectID, float effectDuration)
+	public void GetAOEEffect(int effectID, float effectDuration= 3.0f )
 	{
 		if (effectID == 1)
 		{
@@ -208,7 +246,7 @@ public abstract class Monster : MonoBehaviour,IGetAOEEffect
 	protected IEnumerator DizzyCoroutine(float duration)
 	{
 		isDizzy = true;
-		Debug.Log($"{gameObject.name}: 进入眩晕状态，持续 {duration} 秒");
+		// Debug.Log($"{gameObject.name}: 进入眩晕状态，持续 {duration} 秒");
 		
 		// 可选：播放眩晕特效或动画
 		OnDizzyStart();
