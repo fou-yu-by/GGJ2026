@@ -267,8 +267,6 @@ public class MainPlayer : Singleton<MainPlayer>
     {
         if (isUseSkill)
         {
-            
-            
             if (SkillManager.Instance.canUseFireBall == true)
             {
                 isUseSkill = SkillManager.Instance.FireBallSkill.CanUseSkill();

@@ -32,6 +32,13 @@ public class TransitionManager : Singleton<TransitionManager>
         {
             PlayerSceneUI.SetActive(true);
         }
+
+
+        if (currentScene == "Thanks")
+        {
+            PlayerSceneUI.SetActive(false);
+            
+        }
     }
 
     public void TransitionToScene(string from, string to)
