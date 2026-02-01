@@ -165,8 +165,10 @@ MonoBehaviour:
   attackPower: 2
   collisionCooldown: 1
   parentObject: {fileID: 6728714646010421889}
+  monsterAttackInterval: 1
   moveSpeed: 5
   movediffrange: 1
+  pathUpdateInterval: 0.1
 --- !u!1 &8900065333426448020
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +184,7 @@ GameObject:
   - component: {fileID: 6471340507138823494}
   m_Layer: 6
   m_Name: monster_3
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,16 +335,17 @@ MonoBehaviour:
   attackPower: 4
   collisionCooldown: 1
   parentObject: {fileID: 0}
+  monsterAttackInterval: 1
   moveSpeed: 3
   movediffrange: 0.5
   preferredDistance: 9
-  minDistance: 7
+  minDistance: 3
   maxDistance: 12
   distanceTolerance: 1
   bulletPrefab: {fileID: 6479362869832307008, guid: c8c09c487e59f3a44a266584d770f104, type: 3}
   bulletSpeed: 10
-  bulletRange: 30
-  fireRate: 1.5
+  bulletRange: 100
+  fireRate: 0.8
   firePoint: {fileID: 6728714646010421889}
   obstacleCheckDistance: 2
   avoidanceStrength: 2
