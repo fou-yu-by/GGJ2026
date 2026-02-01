@@ -896,6 +896,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ed52b5c36eb644d86ca10443e253de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 726600254}
+  targetCamera: {fileID: 1067724519}
+  useCustomBounds: 1
+  customBoundsCenterOffset: {x: 0, y: 0}
+  customBoundsSize: {x: 110, y: 110}
+  followSpeed: 5
+  showDebugInfo: 0
 --- !u!1001 &1172650584
 PrefabInstance:
   m_ObjectHideFlags: 0
