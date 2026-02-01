@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e862f45d110b4a748a0e660b90b3a923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 10
+  coolDown: 5
   unlockedMasks:
   - {fileID: 11400000, guid: 8dd7ffd6f184fdf429591c22cc9c8008, type: 2}
   targetLayer:
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc2d09068311154487fd9c0afad517b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 10
+  coolDown: 3
   unlockedMasks:
   - {fileID: 11400000, guid: 438ce083753d00b459f505a6b397777b, type: 2}
   targetLayer:

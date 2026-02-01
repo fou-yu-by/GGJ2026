@@ -52,6 +52,11 @@ public class Skill : MonoBehaviour
         float minDistance = Mathf.Infinity;
         foreach (var hitInfo in hits)
         {
+            // 检查怪物是否已激活
+            Monster monsterComponent = hitInfo.GetComponent<Monster>();
+            if (monsterComponent == null || !monsterComponent.IsActivated)
+                continue;
+                
             if (Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position) <= minDistance)
             {
                 minDistance = Vector2.Distance(MainPlayer.Instance.transform.position, hitInfo.transform.position);

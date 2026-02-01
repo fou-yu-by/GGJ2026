@@ -68,6 +68,14 @@ public class Monster2 : Monster
 		Vector2 directionToPlayer = (playerPos - currentPos).normalized;
 		Vector2 moveDirection = Vector2.zero;
 
+		// 当目标是怪物时（互相攻击状态），使用简单的直线移动
+		if (isAggroToMonsters && player.CompareTag("Monster"))
+		{
+			moveDirection = directionToPlayer;
+			transform.Translate(moveDirection * actualMoveSpeed * Time.deltaTime);
+			return;
+		}
+
 		// 根据距离决定移动方向
 		if (distanceToPlayer < minDistance)
 		{

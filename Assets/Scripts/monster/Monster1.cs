@@ -27,6 +27,15 @@ public class Monster1 : Monster
 		{
 			return;
 		}
+		
+		// 当目标是怪物时（互相攻击状态），使用直线移动而不是A*寻路，避免性能问题
+		if (isAggroToMonsters && player.CompareTag("Monster"))
+		{
+			Vector2 directionToTarget = (player.transform.position - transform.position).normalized;
+			transform.Translate(directionToTarget * actualMoveSpeed * Time.deltaTime);
+			return;
+		}
+		
 		AutoPath();
 		
 		// 路径无效时直接朝玩家移动

@@ -19,10 +19,15 @@ public class MainPlayer : Singleton<MainPlayer>
     [Header("移动")]
     [SerializeField] public Vector2 inputMovement;
     [SerializeField] private float moveSpeed;
+    public Vector2 lastDirection = Vector2.right; // 记录最近的移动方向
 
     private bool isAttack;
     private bool isPickUp;
     private bool isUseSkill;
+    
+    // 面具切换消抖
+    [SerializeField] private float switchMaskCooldown = 0.5f; // 切换冷却时间
+    private float switchMaskTimer = 0f;
     
     [SerializeField] private LayerMask enemyLayer;
     
@@ -131,6 +136,10 @@ public class MainPlayer : Singleton<MainPlayer>
     private void HandleMove(InputAction.CallbackContext ctx) // AI将onmove改为handlemove
     {
         inputMovement = ctx.ReadValue<Vector2>();
+        if (inputMovement != Vector2.zero)
+        {
+            lastDirection = inputMovement.normalized;
+        }
     }
 
     #endregion
@@ -140,6 +149,12 @@ public class MainPlayer : Singleton<MainPlayer>
         Move();
         UpdateAnimation();
         UseCurrentMaskSkill();
+        
+        // 更新面具切换消抖计时器
+        if (switchMaskTimer > 0f)
+        {
+            switchMaskTimer -= Time.deltaTime;
+        }
     }
 
     void Move()
@@ -201,9 +216,15 @@ public class MainPlayer : Singleton<MainPlayer>
     public void PickUpTheMask(MaskBase mask, GameObject hit)
     {
         
+        // 消抖检查：如果还在冷却中，不允许切换
+        if (switchMaskTimer > 0f)
+            return;
         
         if (isPickUp)
         {
+            // 切换成功，启动冷却计时器
+            switchMaskTimer = switchMaskCooldown;
+            
             EquipManager.Instance.Mask = mask;
             EquipManager.Instance.UpdateSlotUI();
             

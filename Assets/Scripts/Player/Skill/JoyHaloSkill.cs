@@ -21,7 +21,7 @@ public class JoyHaloSkill : Skill
 
       foreach (var monster in takeAOEMonsters)
       {
-            monster.GetAOEEffect(1,5);
+            monster.GetAOEEffect(1,3);
       }
 
    }
