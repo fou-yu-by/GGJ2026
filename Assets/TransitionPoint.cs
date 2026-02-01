@@ -9,7 +9,8 @@ public class TransitionPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            TransitionManager.Instance.TransitionToScene(TransitionManager.Instance.currentScene, "Level2");
+            if(GameObject.FindGameObjectWithTag("Monster") == null)
+                TransitionManager.Instance.TransitionToScene(TransitionManager.Instance.currentScene, "Level2");
         }
     }
 }
