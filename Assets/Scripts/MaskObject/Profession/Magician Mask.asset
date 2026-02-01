@@ -15,7 +15,7 @@ MonoBehaviour:
   MaskType: 1
   SkillType: 4
   MaskName: Magician Mask
-  MaskIcon: {fileID: 21300000, guid: 66e35897d7abff2459d3f099578584b6, type: 3}
+  MaskIcon: {fileID: -423225514, guid: 1a78545efc4e61a49a3e229cd2e8317a, type: 3}
   MaskModifiers:
   - modifierName: damage
     modifierValue: 20

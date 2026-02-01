@@ -1209,6 +1209,8 @@ GameObject:
   - component: {fileID: 1418837975}
   - component: {fileID: 1418837974}
   - component: {fileID: 1418837977}
+  - component: {fileID: 1418837978}
+  - component: {fileID: 1418837979}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1238,8 +1240,8 @@ MonoBehaviour:
   checkTargetDistance: 20
   damageRange: 5
   flySpeed: 3
-  skillImage: {fileID: 21300000, guid: 66e35897d7abff2459d3f099578584b6, type: 3}
-  FireBallPrefab: {fileID: 0}
+  skillImage: {fileID: -1944710053, guid: 1a78545efc4e61a49a3e229cd2e8317a, type: 3}
+  FireBallPrefab: {fileID: 6932390233177845132, guid: ff77faef56d15384ea4038d909b48a8d, type: 3}
 --- !u!114 &1418837975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,10 +1256,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireBallSkill: {fileID: 0}
   ArrowSkill: {fileID: 0}
+  JoyHaloSkill: {fileID: 0}
+  MadHaloSkill: {fileID: 0}
   skillImage: {fileID: 185955615}
   CDUI: {fileID: 1396867784}
   canUseFireBall: 0
   canUseArrow: 0
+  canUseJoyHalo: 0
+  canUseMadHalo: 0
 --- !u!4 &1418837976
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,8 +1301,54 @@ MonoBehaviour:
   checkTargetDistance: 0
   damageRange: 0
   flySpeed: 5
+  skillImage: {fileID: -578825952, guid: 920a56d815bf48b4d8df088c8da0fbf7, type: 3}
+  arrowPrefab: {fileID: 8246863360632295993, guid: 6015f3b4538164d42ae4304250748aa1, type: 3}
+--- !u!114 &1418837978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418837973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d8fd2961e7aa34797d813747701347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 0
+  unlockedMasks:
+  - {fileID: 11400000, guid: 7c6a4e770b3cfcb48ac945225d361044, type: 2}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damageMultiplier: 0
+  checkTargetDistance: 0
+  damageRange: 0
+  flySpeed: 0
   skillImage: {fileID: 0}
-  arrowPrefab: {fileID: 0}
+--- !u!114 &1418837979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418837973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725f0b79e57bd6141ab12ba24c370167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 0
+  unlockedMasks:
+  - {fileID: 11400000, guid: d502ed6c2bb193641b75c4e74efe6228, type: 2}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damageMultiplier: 0
+  checkTargetDistance: 0
+  damageRange: 0
+  flySpeed: 0
+  skillImage: {fileID: 0}
 --- !u!1 &1490267664
 GameObject:
   m_ObjectHideFlags: 0

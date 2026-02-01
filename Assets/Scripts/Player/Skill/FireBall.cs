@@ -18,10 +18,18 @@ public class FireBall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        Destroy(gameObject, 4);
+    }
+
     private void Update()
     {
         if(target == null) return;
         else{ rb.velocity = (target.position - transform.position).normalized * flySpeed;}
+        Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        transform.LookAt(targetPosition);
+        TriggerBomb();
     }
 
     public void CacheTarget(Transform target, float flySpeed, int damage, float damageRange)
@@ -41,7 +49,7 @@ public class FireBall : MonoBehaviour
     
     public void TriggerBomb()
     {
-        var hit = Physics2D.OverlapCircle(transform.position, damageRange, enemyLayer);
+        var hit = Physics2D.OverlapCircle(transform.position, 2, enemyLayer);
         if (hit != null)
         {
             //TODO:触发爆炸效果
@@ -50,9 +58,17 @@ public class FireBall : MonoBehaviour
             foreach (var result in results)
             {
                 result.GetComponent<Monster>().TakeDamage(damage);
+                Destroy(gameObject);
             }
         }
     }
-    
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 2);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, damageRange);
+    }
 }

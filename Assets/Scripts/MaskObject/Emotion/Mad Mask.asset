@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mad Mask
   m_EditorClassIdentifier: 
   MaskType: 0
+  SkillType: 6
   MaskName: MadMask
   MaskIcon: {fileID: 0}
   MaskModifiers: []
