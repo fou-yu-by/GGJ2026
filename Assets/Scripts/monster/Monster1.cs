@@ -28,10 +28,17 @@ public class Monster1 : Monster
 			return;
 		}
 		AutoPath();
+		
+		// 路径无效时直接朝玩家移动
+		if (pathPoints == null || pathPoints.Count == 0 || currentPathIndex >= pathPoints.Count)
+		{
+			Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
+			transform.Translate(directionToPlayer * actualMoveSpeed * Time.deltaTime);
+			return;
+		}
+		
 		Vector2 directionToNextPoint = (pathPoints[currentPathIndex] - transform.position).normalized;
 		transform.Translate(directionToNextPoint * actualMoveSpeed * Time.deltaTime);
-		// Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
-		// transform.Translate(directionToPlayer * actualMoveSpeed * Time.deltaTime);
 	}
 	private void AutoPath()
 	{
@@ -59,10 +66,16 @@ public class Monster1 : Monster
 	}
 	private void UpdatePath()
 	{
-		Vector2 st=transform.position+(player.transform.position-transform.position).normalized*5f;
-		seeker.StartPath(st, player.transform.position,Path=> {
-			pathPoints = Path.vectorPath;
+		seeker.StartPath(transform.position, player.transform.position, path => {
+			if (path.error) return;
+			pathPoints = path.vectorPath;
 			currentPathIndex = 0;
+			// 跳过已经路过或太近的点，避免回头
+			while (currentPathIndex < pathPoints.Count - 1 && 
+			       Vector2.Distance(transform.position, pathPoints[currentPathIndex]) < 3f)
+			{
+				currentPathIndex++;
+			}
 		});
 	}
 	protected override void OnPlayerCollision(GameObject playerObject)

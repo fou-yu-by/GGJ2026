@@ -339,7 +339,7 @@ MonoBehaviour:
   monsterAttackInterval: 1
   moveSpeed: 4
   movediffrange: 0.5
-  pathUpdateInterval: 1
+  pathUpdateInterval: 0.2
 --- !u!114 &8262945846270795136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   drawGizmos: 1
-  detailedGizmos: 1
+  detailedGizmos: 0
   startEndModifier:
     addPoints: 1
     exactStartPoint: 3
